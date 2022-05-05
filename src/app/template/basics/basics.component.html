@@ -1,0 +1,67 @@
+<h2>Basicos</h2>
+<hr />
+<div class="row">
+  <div class="col">
+    <form (ngSubmit)="Save()" #myForm="ngForm" autocomplete="off">
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Producto</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nombre del producto"
+            [ngModel]="initForm.product"
+            name="product"
+            required
+            minlength="3"
+          />
+          <span class="form-text text-danger" *ngIf="ValidProduct()"
+            >Debe ser de 3 letras</span
+          >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Precio</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Precio del producto"
+            [ngModel]="initForm.price"
+            name="price"
+            required
+          />
+          <span class="form-text text-danger" *ngIf="ValidPrice()"
+            >Debe ser de mayor a 0</span
+          >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Existencias</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Existencias del producto"
+            [ngModel]="initForm.stock"
+            name="stock"
+            customMin
+            [minimum]="0"
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button
+            type="submit"
+            class="btn btn-primary float-end"
+            [disabled]="myForm.invalid"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,117 @@
+<h2>Validaciones <strong>Reactivas</strong></h2>
+<hr />
+<div class="row">
+  <div class="col">
+    <form autocomplete="off" [formGroup]="myregisterForm" (ngSubmit)="Save()">
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nombre del usuario"
+            formControlName="name"
+          />
+          <span class="form-text text-danger" *ngIf="ValidField('name')"
+            >Debe ser en formato de nombre y apellido.</span
+          >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-9">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email del usuario"
+            formControlName="email"
+          />
+          <span class="form-text text-danger" *ngIf="ValidField('email')">
+            {{ emailErrorMsg }}</span
+          >
+          <!-- <span class="form-text text-danger" *ngIf="EmailRequired()"
+            >El email es obligatorio.</span
+          >
+          <span class="form-text text-danger" *ngIf="EmailFormat()"
+            >Formato incorrecto.</span
+          >
+          <span class="form-text text-danger" *ngIf="EmailDuplicate()"
+            >Correo existente.</span
+          > -->
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Username</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nombre de usuario"
+            formControlName="username"
+          />
+          <span class="form-text text-danger" *ngIf="ValidField('username')"
+            >El username no puede ser strider.</span
+          >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Password</label>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Contraseña de usuario"
+            formControlName="password"
+          />
+          <span class="form-text text-danger" *ngIf="ValidField('password')"
+            >La contraseña debe ser mayor a 6 caracteres.</span
+          >
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Confirmar Password</label>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Contraseña de usuario"
+            formControlName="confirmPassword"
+          />
+          <span
+            class="form-text text-danger"
+            *ngIf="ValidField('confirmPassword')"
+            >Las contraseñas no coinciden</span
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button
+            class="btn btn-success float-end"
+            type="submit"
+            [disabled]="myregisterForm.pending"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<pre>myregisterForm valid: {{ myregisterForm.valid }}</pre>
+<pre>myregisterForm status: {{ myregisterForm.status }}</pre>
+<pre>myregisterForm errors: {{ myregisterForm.errors | json }}</pre>
+<br />
+<pre>Name: {{ myregisterForm.controls["name"].errors | json }}</pre>
+<br />
+<pre>Email: {{ myregisterForm.controls["email"].errors | json }}</pre>
+<br />
+<pre>Username: {{ myregisterForm.controls["username"].errors | json }}</pre>
+<br />
+<pre>Password: {{ myregisterForm.controls["password"].errors | json }}</pre>
+<pre>
+ConfirmPassword: {{
+    myregisterForm.controls["confirmPassword"].errors | json
+  }}</pre
+>

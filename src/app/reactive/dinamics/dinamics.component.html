@@ -1,0 +1,66 @@
+<h2>Reactivos <strong>Diamicos</strong></h2>
+<hr />
+
+<form autocomplete="off" [formGroup]="myDinamicForm" (ngSubmit)="Save()">
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Nombre</label>
+    <div class="col-sm-9">
+      <input
+        class="form-control"
+        placeholder="Nombre de la persona"
+        formControlName="name"
+      />
+      <span class="form-text text-danger" *ngIf="ValidField('name')"
+        >Este campo es requerido</span
+      >
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Agregar</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          class="form-control"
+          placeholder="Agregar favorito"
+          [formControl]="newFavorite"
+          (keyup.enter)="AddFavorite()"
+        />
+        <button type="button" class="btn btn-primary" (click)="AddFavorite()">
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Lista de favoritos</label>
+    <div class="col-sm-9" formArrayName="favorites">
+      <div
+        class="input-group mb-2"
+        *ngFor="let favorite of favoritesArray.controls; let i = index"
+      >
+        <input class="form-control" [formControlName]="i" />
+        <button type="button" class="btn btn-danger" (click)="Drop(i)">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <button
+        type="button"
+        class="btn btn btn-outline-secondary"
+        (click)="Save()"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<pre>Valid : {{ myDinamicForm.valid }}</pre>
+<br />
+<pre>Value : {{ myDinamicForm.value | json }}</pre>
+<br />
+<pre>Valid : {{ newFavorite.valid }}</pre>
+<pre>Value : {{ newFavorite.value }}</pre>
